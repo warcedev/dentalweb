@@ -1,0 +1,55 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-sans: "Instrument Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+
+  /* Logo */
+  --color-navy: #06163A;
+  --color-navy-2: #0B2152;
+  --color-sky: #4DC8FF;
+  --color-royal: #1E6BFF;
+  --color-brand: #1E90FF;
+
+  /* Sistema */
+  --color-teal: #0E7C86;
+  --color-teal-light: #5CCBC4;
+  --color-ink: #0A0A0A;
+  --color-ink-2: #141414;
+
+  /* Clínicos */
+  --color-diag: #DC2626;
+  --color-trat: #EA580C;
+  --color-done: #2563EB;
+  --color-fail: #7C3AED;
+  --color-follow: #D97706;
+
+  /* Primario (cambia con el tema) */
+  --color-primary: #0E7C86;
+  --color-on-primary: #FFFFFF;
+}
+
+.dark {
+  --color-primary: #5CCBC4;
+  --color-on-primary: #0A0A0A;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
+}
+
+body {
+  @apply bg-white text-slate-800 antialiased dark:bg-ink dark:text-neutral-200;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
