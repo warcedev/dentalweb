@@ -1,4 +1,4 @@
-import { CalendarDays, Users, Wallet, FolderOpen, TrendingUp, AlertTriangle, Bell, Search } from 'lucide-react'
+import { CalendarDays, Users, Wallet, FolderOpen, TrendingUp, AlertTriangle, Search } from 'lucide-react'
 import { ToothIcon } from './ui.jsx'
 import { gs } from '../config.js'
 
@@ -72,7 +72,7 @@ export default function AppMock() {
                 <p className="text-[11px] text-slate-500">Lunes 16/03/2026</p>
               </div>
               <span className="flex items-center gap-1 rounded-full bg-slate-100 px-2 py-1 text-[10px] font-medium text-slate-600">
-                <Bell className="h-3 w-3" /> 3 recordatorios enviados
+                <CalendarDays className="h-3 w-3" /> 5 turnos hoy
               </span>
             </div>
 

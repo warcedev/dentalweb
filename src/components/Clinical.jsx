@@ -1,4 +1,4 @@
-import { useId, useMemo, useState } from 'react'
+import { useId, useState } from 'react'
 import { History, Activity } from 'lucide-react'
 import { Section } from './ui.jsx'
 
@@ -184,129 +184,16 @@ function Odontogram() {
   )
 }
 
-/* ──────────────────────── Periodontograma ─────────────────────── */
-
-// Sondaje de ejemplo (mm). 6 puntos por pieza: 3 vestibulares + 3 palatinos.
-const PERIO_TEETH = [16, 15, 14, 13]
-const C1 = { date: '18/08/2025', depth: [[5, 4, 6, 6, 5, 5], [4, 3, 4, 4, 4, 5], [3, 3, 4, 4, 3, 3], [3, 2, 3, 3, 3, 4]], bleed: [[1, 0, 1, 1, 1, 0], [1, 0, 0, 1, 0, 1], [0, 0, 1, 0, 0, 0], [0, 0, 0, 0, 1, 1]], mob: [1, 0, 0, 0] }
-const C2 = { date: '10/02/2026', depth: [[4, 3, 4, 4, 4, 4], [3, 2, 3, 3, 3, 4], [3, 2, 3, 3, 2, 3], [2, 2, 3, 3, 2, 3]], bleed: [[1, 0, 0, 0, 1, 0], [0, 0, 0, 0, 0, 1], [0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0]], mob: [0, 0, 0, 0] }
-
-const stats = (c) => {
-  const d = c.depth.flat()
-  const b = c.bleed.flat()
-  return {
-    mean: (d.reduce((a, x) => a + x, 0) / d.length).toFixed(1).replace('.', ','),
-    bleed: Math.round((b.filter(Boolean).length / b.length) * 100),
-    deep: d.filter((x) => x >= 4).length,
-  }
-}
-
-function Periodontogram() {
-  const [showPrev, setShowPrev] = useState(true)
-  const s1 = useMemo(() => stats(C1), [])
-  const s2 = useMemo(() => stats(C2), [])
-
-  const W = 560, H = 210, L = 34, R = 10, T = 34, MM = 18
-  const toothW = (W - L - R) / PERIO_TEETH.length
-  const px = (t, j) => L + t * toothW + 8 + (j + 0.5) * ((toothW - 16) / 6)
-  const py = (d) => T + d * MM
-  const line = (c) => c.depth.flatMap((row, t) => row.map((d, j) => `${px(t, j)},${py(d)}`)).join(' ')
-
-  return (
-    <div className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm sm:p-8 dark:border-neutral-800 dark:bg-neutral-900">
-      <div className="flex flex-wrap items-start justify-between gap-3">
-        <div>
-          <h3 className="text-xl font-bold text-slate-900 dark:text-white">Periodontograma</h3>
-          <p className="mt-1 text-sm text-slate-600 dark:text-neutral-400">
-            Sondaje de 6 puntos por pieza, sangrado, placa y movilidad. Compará controles en un gráfico.
-          </p>
-        </div>
-        <label className="flex cursor-pointer items-center gap-2 text-sm text-slate-700 dark:text-neutral-300">
-          <input
-            type="checkbox"
-            checked={showPrev}
-            onChange={(e) => setShowPrev(e.target.checked)}
-            className="h-4 w-4 accent-[var(--color-primary)]"
-          />
-          Mostrar control anterior
-        </label>
-      </div>
-
-      <svg viewBox={`0 0 ${W} ${H}`} className="mt-6 w-full" role="img" aria-label={`Profundidad de sondaje de las piezas ${PERIO_TEETH.join(', ')}: promedio ${s1.mean} mm el ${C1.date} y ${s2.mean} mm el ${C2.date}`}>
-        {/* grilla mm */}
-        {[0, 2, 4, 6, 8].map((d) => (
-          <g key={d}>
-            <line x1={L} x2={W - R} y1={py(d)} y2={py(d)} className={d === 4 ? 'stroke-diag/50' : 'stroke-slate-100 dark:stroke-neutral-800'} strokeDasharray={d === 4 ? '5 4' : undefined} />
-            <text x={L - 8} y={py(d) + 3} textAnchor="end" className="fill-slate-400 text-[9px] dark:fill-neutral-500">{d}</text>
-          </g>
-        ))}
-        <text x={W - R} y={py(4) - 4} textAnchor="end" className="fill-diag text-[9px] font-semibold">4 mm</text>
-        {/* piezas */}
-        {PERIO_TEETH.map((n, t) => (
-          <g key={n}>
-            <rect x={L + t * toothW + 3} y="2" width={toothW - 6} height="22" rx="6" className="fill-slate-50 dark:fill-neutral-800" />
-            <text x={L + t * toothW + toothW / 2} y="17" textAnchor="middle" className="fill-slate-800 text-[11px] font-bold dark:fill-neutral-100">
-              {n}
-              <tspan className="fill-slate-400 text-[9px] font-medium dark:fill-neutral-400"> · M{C2.mob[t]}</tspan>
-            </text>
-            <line x1={L + t * toothW + toothW / 2} x2={L + t * toothW + toothW / 2} y1={T} y2={py(8)} className="stroke-slate-100 dark:stroke-neutral-800" />
-            <text x={L + t * toothW + toothW / 4 + 2} y={H - 4} textAnchor="middle" className="fill-slate-400 text-[9px] dark:fill-neutral-500">V</text>
-            <text x={L + t * toothW + (3 * toothW) / 4 - 2} y={H - 4} textAnchor="middle" className="fill-slate-400 text-[9px] dark:fill-neutral-500">P</text>
-          </g>
-        ))}
-        {showPrev && (
-          <polyline points={line(C1)} fill="none" strokeWidth="2" strokeDasharray="5 4" className="stroke-slate-400 dark:stroke-neutral-500" />
-        )}
-        <polyline points={line(C2)} fill="none" strokeWidth="2.5" strokeLinejoin="round" style={{ stroke: 'var(--color-primary)' }} />
-        {C2.depth.map((row, t) =>
-          row.map((d, j) => (
-            <circle
-              key={`${t}-${j}`}
-              cx={px(t, j)}
-              cy={py(d)}
-              r={C2.bleed[t][j] ? 4.5 : 3}
-              className={C2.bleed[t][j] ? 'fill-diag' : 'fill-white dark:fill-neutral-900'}
-              style={C2.bleed[t][j] ? undefined : { stroke: 'var(--color-primary)', strokeWidth: 2 }}
-            />
-          )),
-        )}
-      </svg>
-
-      <div className="mt-3 flex flex-wrap gap-x-5 gap-y-2 text-xs text-slate-600 dark:text-neutral-400">
-        <span className="flex items-center gap-2"><span className="h-0.5 w-5 bg-primary" aria-hidden="true" /> Control {C2.date}</span>
-        {showPrev && <span className="flex items-center gap-2"><span className="h-0 w-5 border-t-2 border-dashed border-slate-400" aria-hidden="true" /> Control {C1.date}</span>}
-        <span className="flex items-center gap-2"><span className="h-2.5 w-2.5 rounded-full bg-diag" aria-hidden="true" /> Sangrado al sondaje</span>
-        <span>M = movilidad · V/P = vestibular/palatino</span>
-      </div>
-
-      <dl className="mt-6 grid grid-cols-3 gap-3 border-t border-slate-100 pt-5 dark:border-neutral-800">
-        {[
-          ['Profundidad media', `${s1.mean} → ${s2.mean} mm`],
-          ['Sangrado', `${s1.bleed}% → ${s2.bleed}%`],
-          ['Sitios ≥ 4 mm', `${s1.deep} → ${s2.deep}`],
-        ].map(([k, v]) => (
-          <div key={k}>
-            <dt className="text-xs text-slate-500 dark:text-neutral-400">{k}</dt>
-            <dd className="mt-1 text-sm font-bold text-slate-900 sm:text-base dark:text-white">{v}</dd>
-          </div>
-        ))}
-      </dl>
-      <p className="mt-3 text-xs text-slate-400 dark:text-neutral-500">Datos de ejemplo de un paciente ficticio.</p>
-    </div>
-  )
-}
-
 export default function Clinical() {
   return (
     <Section
       id="odontograma"
-      eyebrow="Odontograma y periodontograma"
+      eyebrow="Odontograma"
       title="La boca del paciente, clara de un vistazo"
       intro="Dientes dibujados de forma anatómica, con un color para cada estado. Y una línea de tiempo para volver a cualquier fecha pasada."
     >
-      <div className="grid gap-6 lg:grid-cols-2 [&>*]:min-w-0">
+      <div className="mx-auto max-w-4xl">
         <Odontogram />
-        <Periodontogram />
       </div>
       <p className="mx-auto mt-8 flex max-w-2xl items-start justify-center gap-2 text-center text-sm text-slate-600 dark:text-neutral-400">
         <Activity className="mt-0.5 h-4 w-4 shrink-0 text-primary" aria-hidden="true" />

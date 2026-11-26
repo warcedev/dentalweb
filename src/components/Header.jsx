@@ -4,7 +4,6 @@ import { Download, Menu, Moon, Sun, X } from 'lucide-react'
 const NAV = [
   ['Funciones', '#funciones'],
   ['Odontograma', '#odontograma'],
-  ['Portal', '#portal'],
   ['Seguridad', '#seguridad'],
   ['Preguntas', '#preguntas'],
   ['Contacto', '#contacto'],

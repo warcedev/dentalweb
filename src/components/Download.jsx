@@ -6,7 +6,6 @@ import {
   FlaskConical,
   WifiOff,
   HardDrive,
-  MailX,
   Handshake,
   Info,
   Copy,
@@ -30,10 +29,9 @@ function detectOS() {
 }
 
 const NOTICES = [
-  [FlaskConical, 'Trae datos de ejemplo', 'Viene con pacientes ficticios. No la uses con pacientes reales.'],
+  [FlaskConical, 'Trae datos de ejemplo', 'Viene con pacientes ficticios y es solo para conocer el sistema. No la uses con pacientes reales.'],
   [WifiOff, 'Funciona sin internet', 'No hace falta instalar nada más.'],
   [HardDrive, 'Los datos quedan en tu computadora', 'Todo lo que cargues se guarda solo en esa computadora.'],
-  [MailX, 'No envía correos ni recordatorios', 'Es solo para conocer el sistema.'],
 ]
 
 function CopyField({ label, value }) {
@@ -169,7 +167,7 @@ export default function Download() {
             ingresá con este usuario:
           </p>
           <div className="grid gap-2 sm:grid-cols-2">
-            <CopyField label="Correo" value="admin@consultorio.test" />
+            <CopyField label="Usuario" value="admin@consultorio.test" />
             <CopyField label="Contraseña" value="password" />
           </div>
         </div>
@@ -191,7 +189,6 @@ export default function Download() {
   return (
     <Section
       id="descargar"
-      tone="soft"
       eyebrow={`Demo gratis · versión ${VERSION}`}
       title="Descargá la demo y probala en tu computadora"
       intro="Conocé DentalWeb a tu ritmo, con pacientes de ejemplo ya cargados."
@@ -206,7 +203,7 @@ export default function Download() {
           <Info className="h-6 w-6 shrink-0 text-follow" aria-hidden="true" />
           <h3 className="text-lg font-bold text-slate-900 dark:text-white">Es una versión de demostración</h3>
         </div>
-        <ul className="mt-5 grid gap-4 sm:grid-cols-2">
+        <ul className="mt-5 grid gap-4 sm:grid-cols-3">
           {NOTICES.map(([Icon, t, d]) => (
             <li key={t} className="flex gap-3">
               <Icon className="mt-0.5 h-5 w-5 shrink-0 text-[#B45309] dark:text-follow" aria-hidden="true" />
@@ -235,8 +232,8 @@ export default function Download() {
 
       {/* descargas */}
       {os === 'mobile' && (
-        <p className="mt-10 rounded-xl bg-white p-4 text-center text-sm text-slate-700 dark:bg-neutral-900 dark:text-neutral-300">
-          📱 Estás en un celular. La demo es para <strong>computadoras Mac o Windows</strong>: abrí esta página desde la
+        <p className="mt-10 rounded-xl border border-slate-200 bg-slate-50 p-4 text-center dark:border-neutral-800 text-sm text-slate-700 dark:bg-neutral-900 dark:text-neutral-300">
+          Estás viendo esta página desde un celular o tablet. DentalWeb es para <strong>computadoras Mac o Windows</strong>: abrí esta página desde la
           computadora del consultorio.
         </p>
       )}

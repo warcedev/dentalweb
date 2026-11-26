@@ -1,4 +1,4 @@
-import { CalendarX2, FileStack, Calculator, UserX, ArrowRight } from 'lucide-react'
+import { CalendarX2, FileStack, Calculator, FileSearch, ArrowRight } from 'lucide-react'
 import { Section } from './ui.jsx'
 
 const ITEMS = [
@@ -18,9 +18,9 @@ const ITEMS = [
     fix: 'Presupuestos, cuotas y pagos en el mismo lugar, con el saldo calculado solo.',
   },
   {
-    icon: UserX,
-    pain: 'Pacientes que se olvidan del turno o del control',
-    fix: 'Recordatorios automáticos de la próxima cita, la limpieza semestral y los controles.',
+    icon: FileSearch,
+    pain: 'No saber qué pacientes faltan o hace tiempo que no vuelven',
+    fix: 'Reportes de ausentismo y de pacientes sin control, para saber a quién llamar.',
   },
 ]
 

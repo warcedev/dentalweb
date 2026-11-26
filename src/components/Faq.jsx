@@ -7,7 +7,7 @@ const FAQ = [
   },
   {
     q: '¿Puedo usar la demo con mis pacientes reales?',
-    a: 'No. La demo trae pacientes ficticios y está hecha solo para conocer el sistema: no envía correos ni recordatorios. Para trabajar con pacientes reales está la versión completa, que se instala con acompañamiento.',
+    a: 'No. La demo trae pacientes ficticios y está hecha solo para conocer el sistema. Para trabajar con pacientes reales está la versión completa, que se instala con acompañamiento.',
   },
   {
     q: '¿Necesito internet para probarla?',
@@ -37,7 +37,7 @@ const FAQ = [
 
 export default function Faq() {
   return (
-    <Section id="preguntas" eyebrow="Preguntas frecuentes" title="¿Tenés dudas?">
+    <Section id="preguntas" tone="soft" eyebrow="Preguntas frecuentes" title="¿Tenés dudas?">
       <div className="mx-auto max-w-3xl">
         <Accordion items={FAQ.map((f) => ({ q: f.q, a: <p>{f.a}</p> }))} />
       </div>

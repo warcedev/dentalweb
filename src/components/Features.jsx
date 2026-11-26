@@ -6,7 +6,6 @@ import {
   Wallet,
   FolderOpen,
   PenLine,
-  Smartphone,
   TrendingUp,
   ShieldCheck,
 } from 'lucide-react'
@@ -19,8 +18,8 @@ const GROUPS = [
       {
         icon: CalendarDays,
         title: 'Agenda',
-        text: 'Turnos por profesional y consultorio sin superposiciones, lista de espera, confirmaciones y ausencias.',
-        bullets: ['Recordatorios automáticos: próxima cita, limpieza semestral y controles'],
+        text: 'Turnos por profesional y consultorio, sin superposiciones.',
+        bullets: ['Lista de espera', 'Confirmaciones y ausencias'],
       },
       {
         icon: ClipboardList,
@@ -49,9 +48,8 @@ const GROUPS = [
       {
         icon: Activity,
         title: 'Periodontograma',
-        text: 'Sondaje de 6 puntos por pieza, sangrado, placa y movilidad.',
+        text: 'Registro de sangrado, placa y movilidad de cada pieza.',
         bullets: ['Gráficos de evolución entre controles'],
-        href: '#odontograma',
       },
       {
         icon: FolderOpen,
@@ -80,12 +78,6 @@ const GROUPS = [
         title: 'Reportes',
         text: 'Pacientes atendidos, ingresos por profesional y por forma de pago, ausentismo y pacientes sin control.',
         bullets: ['Exportación a PDF y Excel'],
-      },
-      {
-        icon: Smartphone,
-        title: 'Portal del paciente',
-        text: 'Cada paciente consulta sus turnos, su saldo y su odontograma, y descarga recetas y recibos.',
-        href: '#portal',
       },
       {
         icon: ShieldCheck,

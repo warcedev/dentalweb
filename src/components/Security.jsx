@@ -14,6 +14,7 @@ export default function Security() {
   return (
     <Section
       id="seguridad"
+      tone="soft"
       eyebrow="Seguridad"
       title="La información de tus pacientes, cuidada"
       intro="Datos sensibles merecen cuidado. DentalWeb controla quién accede a qué y deja registro de cada acción."
@@ -30,7 +31,7 @@ export default function Security() {
         ))}
       </div>
 
-      <div className="mt-8 flex flex-col items-center justify-center gap-4 rounded-2xl border border-slate-200 bg-slate-50 px-6 py-5 text-center sm:flex-row dark:border-neutral-800 dark:bg-neutral-900">
+      <div className="mt-8 flex flex-col items-center justify-center gap-4 rounded-2xl border border-slate-200 bg-white px-6 py-5 text-center sm:flex-row dark:border-neutral-800 dark:bg-neutral-900">
         <p className="text-sm font-medium text-slate-700 dark:text-neutral-300">Cada usuario entra con su cuenta y uno de estos roles:</p>
         <ul className="flex flex-wrap justify-center gap-2">
           {ROLES.map((r) => (

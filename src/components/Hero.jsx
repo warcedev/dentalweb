@@ -34,8 +34,8 @@ export default function Hero() {
             </span>
           </h1>
           <p className="mt-6 max-w-xl text-lg leading-relaxed text-slate-300">
-            DentalWeb reúne la agenda, la historia clínica, el odontograma, los tratamientos y los cobros.
-            Pensado para trabajar en Paraguay: todo en español, montos en guaraníes y hora de Asunción.
+            El sistema de gestión para odontólogos y recepción: agenda, historia clínica, odontograma, tratamientos
+            y cobros en la computadora del consultorio. Todo en español, montos en guaraníes y hora de Asunción.
           </p>
 
           <div className="mt-9 flex flex-col gap-3 sm:flex-row">
@@ -54,7 +54,7 @@ export default function Hero() {
               <ArrowRight className="h-5 w-5" aria-hidden="true" />
             </a>
           </div>
-          <p className="mt-4 text-sm text-slate-400">Para Mac y Windows · Funciona sin internet · Con datos de ejemplo</p>
+          <p className="mt-4 text-sm text-slate-400">Programa para computadoras Mac y Windows · Funciona sin internet · Con datos de ejemplo</p>
 
           <ul className="mt-10 flex flex-wrap gap-x-6 gap-y-3 text-sm text-slate-300">
             <li className="flex items-center gap-2">

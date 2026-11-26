@@ -3,7 +3,6 @@ import Hero from './components/Hero.jsx'
 import Problems from './components/Problems.jsx'
 import Features from './components/Features.jsx'
 import Clinical from './components/Clinical.jsx'
-import Portal from './components/Portal.jsx'
 import Security from './components/Security.jsx'
 import Download from './components/Download.jsx'
 import Faq from './components/Faq.jsx'
@@ -25,7 +24,6 @@ export default function App() {
         <Problems />
         <Features />
         <Clinical />
-        <Portal />
         <Security />
         <Download />
         <Faq />
